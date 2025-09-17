@@ -128,11 +128,29 @@ section{padding: clamp(40px, 6vw, 80px) 0; border-top:1px solid var(--border)}
 }
 
 /* Нижняя подпись */
+/* meta-строка под карточкой */
 .work .meta{
   padding:16px 18px;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  justify-content:space-between;
 }
-.work .meta h4{margin:0; font-size:16px}
+
+/* пусть заголовок занимает всё доступное пространство и корректно переносится */
+.work .meta h4{
+  margin:0;
+  font-size:16px;
+  flex: 1 1 auto;   /* тянется */
+  min-width: 0;     /* разрешает нормальные переносы в flex */
+  white-space: normal;
+  word-break: keep-all; /* не дробит слова по буквам */
+}
+
+/* чип фиксированной ширины — не сжимать */
+.work .meta .chip{
+  flex: 0 0 auto;
+}
 
 /* Чипы — плотнее и «таблетки» */
 .chip{
@@ -192,7 +210,6 @@ section{padding: clamp(40px, 6vw, 80px) 0; border-top:1px solid var(--border)}
 @media (prefers-reduced-motion: reduce){
   .work, .work .thumb, .work .overlay { transition: none !important; }
 }
-
 
 /* ===== Contact ===== */
 form{display:grid; gap:12px; max-width:680px}
